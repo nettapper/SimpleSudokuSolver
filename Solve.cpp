@@ -9,3 +9,8 @@ Iterate through all 81 positions starting with the top left one
   try a valid one and call the function again
 
 */
+#include <stdio.h>
+
+int main(){
+  printf("Hello world\n");
+}
