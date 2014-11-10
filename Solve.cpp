@@ -11,6 +11,36 @@ Iterate through all 81 positions starting with the top left one
 */
 #include <stdio.h>
 
+void printBoard(int board[9][9]);
+
 int main(){
-  printf("Hello world\n");
+  int board[9][9] = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},		      
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0},
+		      {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+  printBoard(board);
+  return 0;
+}
+
+void printBoard(int board[9][9]){
+  for(int i = 0; i < 9; i++){
+    if(i % 3 == 0 & i != 0){  // horz line after rows 2 & 3
+      printf("---------------------\n");
+    }
+    for(int j = 0; j < 9; j++){
+      if(j == 2 || j == 5){  // vert line after cols 3 and 6
+	printf("%d | ", board[i][j]);
+      }
+      else {
+	printf("%d ", board[i][j]);
+      }
+    }
+    printf("\n");
+  }
 }
