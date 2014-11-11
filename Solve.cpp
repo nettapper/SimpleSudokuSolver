@@ -12,6 +12,7 @@ Iterate through all 81 positions starting with the top left one
 #include <stdio.h>
 
 void printBoard(int board[9][9]);
+void printArray(int arr[], int n);
 bool solve(int (*board)[9][9]);
 
 int main(){
@@ -31,6 +32,14 @@ int main(){
     printf("Board couldn't be solved\n");
   }
   return 0;
+}
+
+void printArray(int arr[], int n){
+  printf("[");
+  for(int i = 0; i < n; i++){
+    printf(" %d,", arr[i]);
+  }
+  printf("]\n");
 }
 
 void printBoard(int board[9][9]){
