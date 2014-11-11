@@ -66,32 +66,36 @@ bool solve(int (*board)[9][9]){
       if((*board)[i][j] == 0){  // needs a value
 	
 	// find un-used values 
-	int notUsed[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};  // bool val for used or not
+	int used[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};  // bool val for used or not
 	for(int k = 0; k < 9; k++){
-	  if((*board)[i][k] == 0) {  // look at cols
-	    notUsed[k] = 1;
+	  printf("%d ", (*board)[i][k]); // debugging
+	  if((*board)[i][k] != 0) {  // look at current row
+	    used[k] = 1;
 	  }
-	  if((*board)[k][j] == 0){  // look at rows
-	    notUsed[k] = 1;
+	  if((*board)[k][j] != 0){  // look at current col
+	    used[k] = 1;
 	  }
 	}
+	printf("\n"); // debugging
 	int a = i - (i%3); // left of 3x3 square (row)
 	int b = j - (j%3); // top of 3x3 square (col)
 	for(int k = a; k < a+3; k++){
 	  for(int l = b; l < b+3; l++){
-	    if((*board)[k][l] == 0){  // look at 3x3
-	      notUsed[k] = 1;
+	    if((*board)[k][l] != 0){  // look at 3x3
+	      used[k] = 1;
 	    }
 	  }
 	}
+	printArray(used, 9); // debugging
 	for(int k = 0; k < 9; k++){  // try out non-used values
-	  if(notUsed[k] == 0){  // not valid value
+	  if(used[k] != 0){  // not valid value
 	    continue;
 	  }
 	  (*board)[i][j] = k+1;
 	  if(i == 9 && j == 9){  // base case (last num found)
 	    return true;
 	  }
+	  printBoard(*board); // debugging
 	  if(solve(board)){  // sol found!
 	    return true;
 	  }
@@ -99,6 +103,5 @@ bool solve(int (*board)[9][9]){
       }
     }
   }
-  printBoard(*board);
   return false;
 }
