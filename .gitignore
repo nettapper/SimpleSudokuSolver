@@ -1,3 +1,4 @@
 # Common files to be ignored
 # Editor backups:
 *~
+out
