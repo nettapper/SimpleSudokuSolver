@@ -10,16 +10,16 @@ boarda = [[7,9,0, 0,0,0, 3,0,0],
     [0,0,2, 3,0,0, 0,0,0],
     [0,0,9, 0,0,0, 0,5,4]]
 
-# testing with this board to make sure the getNext returns correctly
-board = [[8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8],
-    [8,8,8, 8,8,8, 8,8,8]]
+# testing with this empty board to make sure the getNext returns correctly
+board = [[0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0],
+    [0,0,0, 0,0,0, 0,0,0]]
 
 assert(len(board) == 9)  # num of rows must be 9
 for i in range(9):
@@ -29,8 +29,8 @@ for i in range(9):
 print("Div and Conq:")
 
 def solve(board):
-    printBoard(board)  # debugging
-    print("")  # debugging
+    # printBoard(board)  # debugging
+    # print("")  # debugging
     # get our x and y position
     x,y = getNext(board)
     if(x == -1 or y == -1):
@@ -39,7 +39,8 @@ def solve(board):
     for n in range(1,10):
         if(isValid(board, x, y, n)):
             board[x][y] = n  # try n
-            solve(board)
+            if(solve(board)):
+                return True
             board[x][y] = 0  # n didn't work try next
     return False
 
