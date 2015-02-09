@@ -26,12 +26,12 @@ def solveV2(board, x=0, y=0):
             if(board[i][j] == 0):
                 isSoln = False  # a val was not found!
                 break
-            if(getPoss(board, x, y) != 0):
+            if(getPossible(board, x, y) != 0):
                 isSoln = False  # nothing can be inserted incorrectly
                 break
     if(isSoln): return True
     # find possible vals for board[x,y]
-    possible = getPoss(board, x, y)
+    possible = getPossible(board, x, y)
     if(len(possible) == 0): return False
     for val in possible:
         board[x][y] = val
@@ -45,29 +45,7 @@ def solveV2(board, x=0, y=0):
         solveV2(board, i, j)
     return False
 
-def solve(board):
-    # debugging
-    print("**")
-    printBoard(board)
-    print("**")
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            if (board[i][j] == 0):
-                possible = getPoss(board, i, j)
-                if (len(possible) == 0):  # no good vals left
-                    return False
-                for x in range(len(possible)):  # todo: check to is possible vals are still possible!!
-                    board[i][j] = possible[x]
-                    if(solve(board)):
-                        return True
-                return False  # the loop exited -> no vals left to try
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            if(board[i][j] == 0):
-                return False  # a val was not found!
-    return True
-
-def getPoss(board, i, j):
+def getPossible(board, i, j):
     vals = [1,2,3,4,5,6,7,8,9]
     # check row
     for x in range(len(board[i])):
