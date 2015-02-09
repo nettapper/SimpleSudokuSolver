@@ -17,7 +17,11 @@ for i in range(9):
 
 print("Div and Conq")
 
-def solveV2(board, x=0, y=0):
+def solve(board, x=0, y=0):
+    # debugging
+    printBoard(board)
+    print("***")
+    # end debugging
     assert(board[x][y] == 0)  # must be an unkown val to start
     # sol has 81 squares that are not 0's
     isSoln = True
@@ -26,15 +30,15 @@ def solveV2(board, x=0, y=0):
             if(board[i][j] == 0):
                 isSoln = False  # a val was not found!
                 break
-            if(getPossible(board, x, y) != 0):
-                isSoln = False  # nothing can be inserted incorrectly
-                break
+            for n in range(1,10):
+                if(isValid(board, i, j, n)):
+                    isSoln = False  # shouldn't have any valid pos left
     if(isSoln): return True
     # find possible vals for board[x,y]
     possible = getPossible(board, x, y)
     if(len(possible) == 0): return False
-    for val in possible:
-        board[x][y] = val
+    for x in range(len(possible)):
+        board[x][y] = possible[x]
         # then inc the x or y vals to a non-zero
         i, j = x, y
         while(board[i][j] != 0):
@@ -42,7 +46,7 @@ def solveV2(board, x=0, y=0):
             if(j >= len(board[i])):
                 i += 1
                 j %= len(board[i])
-        solveV2(board, i, j)
+        solve(board, i, j)
     return False
 
 def getPossible(board, i, j):
@@ -75,6 +79,24 @@ def getPossible(board, i, j):
     # return what is left of the array
     return vals
 
+def isValid(board, i, j, n):
+    # check row
+    for x in range(len(board[i])):
+        current = board[i][x]
+        if (current == n): return False
+    # check col
+    for x in range(len(board)):
+        current = board[x][j]
+        if (current == n): return False
+    # check 3x3 box
+    a = i // 3
+    b = j // 3
+    for x in range(a*3, (a+1)*3):
+        for y in range(b*3, (b+1)*3):
+            current = board[x][y]
+            if (current == n): return False
+    return True
+
 def printBoard(board):
     for i in range(len(board)):
         print(board[i])
@@ -82,7 +104,7 @@ def printBoard(board):
 print("Original Board:")
 printBoard(board)
 print("")
-solveV2(board)
+solve(board)
 print("")
 print("Solved Board:")
 printBoard(board)
