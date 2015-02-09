@@ -18,10 +18,32 @@ for i in range(9):
 print("Div and Conq")
 
 def solveV2(board, x=0, y=0):
+    assert(board[x][y] == 0)  # must be an unkown val to start
     # sol has 81 squares that are not 0's
+    isSoln = True
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if(board[i][j] == 0):
+                isSoln = False  # a val was not found!
+                break
+            if(getPoss(board, x, y) != 0):
+                isSoln = False  # nothing can be inserted incorrectly
+                break
+    if(isSoln): return True
     # find possible vals for board[x,y]
-    #   then inc the x or y vals to a non-zero
-    pass
+    possible = getPoss(board, x, y)
+    if(len(possible) == 0): return False
+    for val in possible:
+        board[x][y] = val
+        # then inc the x or y vals to a non-zero
+        i, j = x, y
+        while(board[i][j] != 0):
+            j += 1
+            if(j >= len(board[i])):
+                i += 1
+                j %= len(board[i])
+        solveV2(board, i, j)
+    return False
 
 def solve(board):
     # debugging
@@ -72,9 +94,6 @@ def getPoss(board, i, j):
                 vals.remove(current)
             except ValueError:
                 pass
-    # debugging
-    print("Above board generated the array below")
-    print(vals)
     # return what is left of the array
     return vals
 
@@ -85,7 +104,7 @@ def printBoard(board):
 print("Original Board:")
 printBoard(board)
 print("")
-solve(board)
+solveV2(board)
 print("")
 print("Solved Board:")
 printBoard(board)
