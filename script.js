@@ -61,16 +61,39 @@ function solve(board) {
 //             board[x][y] = 0  # n didn't work try next
 //     return False
 // 
+function solveBackTrack(board){
+    next = getNext(board);
+    if(next == null){
+	return true;  // no more empty positions
+    }
+    // assert next is len 2
+    if(next.length != 2){
+	console.log("next position failed");
+	return null
+    }
+    x = next[0];
+    y = next[1];
+    for(n=1; n<10; n++){
+	if(isValid(board, x, y, n)){
+	    board[x][y] = n  // try n
+	    if(solveBackTrack(board)){
+		return true;
+	    }
+	    return true;
+	}
+    }
+    return false;
+}
 
 function getNext(board){
     for(x=0; x<board.length; x++){
 	for(y=0; y<board[x].length; y++){
 	    if(board[x][y] == 0){
-		return [x,y]
+		return [x,y];
 	    }
 	}
     }
-    return null
+    return null;
 }
 // 
 // def isValid(board, i, j, n):
