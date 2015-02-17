@@ -61,12 +61,17 @@ function solve(board) {
 //             board[x][y] = 0  # n didn't work try next
 //     return False
 // 
-// def getNext(board):
-//     for x in range(len(board)):
-//         for y in range(len(board[0])):
-//             if(board[x][y] == 0):
-//                 return x,y
-//     return -1,-1
+
+function getNext(board){
+    for(x=0; x<board.length; x++){
+	for(y=0; y<board[x].length; y++){
+	    if(board[x][y] == 0){
+		return [x,y]
+	    }
+	}
+    }
+    return null
+}
 // 
 // def isValid(board, i, j, n):
 //     # check row
