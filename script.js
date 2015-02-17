@@ -21,6 +21,7 @@ var board = [[7,9,0, 0,0,0, 3,0,0],
      [6,1,0, 0,9,0, 0,0,8],
      [0,0,2, 3,0,0, 0,0,0],
      [0,0,9, 0,0,0, 0,5,4]];
+
 // def stringParse(string):
 //     assert(len(string) == 9*9)
 //     board = []
@@ -32,7 +33,6 @@ var board = [[7,9,0, 0,0,0, 3,0,0],
 //         val = eval(string[col])
 //         board[row][col % 9] = val
 //     return board
-
 
 function solve(board) {
     // my assertions
@@ -49,18 +49,6 @@ function solve(board) {
     return solveBackTrack(board);
 }
 
-// def solveBackTrack(board):
-//     x,y = getNext(board)
-//     if(x == -1 or y == -1):
-//         return True  # no more empty positions
-//     for n in range(1,10):
-//         if(isValid(board, x, y, n)):
-//             board[x][y] = n  # try n
-//             if(solveBackTrack(board)):
-//                 return True
-//             board[x][y] = 0  # n didn't work try next
-//     return False
-// 
 function solveBackTrack(board){
     next = getNext(board);
     if(next == null){
@@ -79,7 +67,7 @@ function solveBackTrack(board){
 	    if(solveBackTrack(board)){
 		return true;
 	    }
-	    return true;
+	    board[x][y] = 0;  // n didn't work... need to try a different value
 	}
     }
     return false;
@@ -95,7 +83,7 @@ function getNext(board){
     }
     return null;
 }
-// 
+
 // def isValid(board, i, j, n):
 //     # check row
 //     for x in range(len(board[i])):
@@ -113,11 +101,11 @@ function getNext(board){
 //             current = board[x][y]
 //             if (current == n): return False
 //     return True
-// 
+
 // def printBoard(board):
 //     for i in range(len(board)):
 //         print(board[i])
-// 
-// 
+
+
 // # run the program!
 // main()
