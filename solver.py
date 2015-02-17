@@ -1,18 +1,19 @@
 
 def main():
     print("Starting Up...")
-    board = [  # spacing should make the board more readable
-        [7,9,0, 0,0,0, 3,0,0],
-        [0,0,0, 0,0,6, 9,0,0],
-        [8,0,0, 0,3,0, 0,7,6],
-
-        [0,0,0, 0,0,5, 0,0,2],
-        [0,0,5, 4,1,8, 7,0,0],
-        [4,0,0, 7,0,0, 0,0,0],
-
-        [6,1,0, 0,9,0, 0,0,8],
-        [0,0,2, 3,0,0, 0,0,0],
-        [0,0,9, 0,0,0, 0,5,4]]
+    # board = [  # spacing should make the board more readable
+        # [7,9,0, 0,0,0, 3,0,0],
+        # [0,0,0, 0,0,6, 9,0,0],
+        # [8,0,0, 0,3,0, 0,7,6],
+# 
+        # [0,0,0, 0,0,5, 0,0,2],
+        # [0,0,5, 4,1,8, 7,0,0],
+        # [4,0,0, 7,0,0, 0,0,0],
+# 
+        # [6,1,0, 0,9,0, 0,0,8],
+        # [0,0,2, 3,0,0, 0,0,0],
+        # [0,0,9, 0,0,0, 0,5,4]]
+    board = stringParse("790000300000006900800030076000005002005418700400700000610090008002300000009000054")
 
     print("Original Board:")
     printBoard(board)
@@ -22,6 +23,20 @@ def main():
     print("")
     print("Solved Board:")
     printBoard(board)
+    
+def stringParse(string):
+    assert(len(string) == 9*9)
+    board = []
+    row, col = -1, 0
+    for col in range(len(string)):
+        if(col % 9 == 0):
+            board.append([0 for _ in range(9)])
+            row += 1
+        val = eval(string[col])
+        board[row][col % 9] = val
+    return board
+
+
 
 def solve(board):
     assert(len(board) == 9)  # num of rows must be 9
