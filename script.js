@@ -123,9 +123,13 @@ function isValid(board, i, j, n){
     return true;
 }
 
-// def printBoard(board):
-//     for i in range(len(board)):
-//         print(board[i])
+function printBoard(board) {
+    for(var i=0; i < board.length; i++){
+        for(var j=0; j < board[i].length; j++) {
+            console.log(board[i][j]);
+        }
+    }
+}
 
 
 // # run the program!
