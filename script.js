@@ -50,7 +50,7 @@ function solve(board) {
 	console.log("Improper length of board rows");
 	return null
     }
-    for(i = 0; i < board.length; i++){
+    for(var i = 0; i < board.length; i++){
 	if(board[i].length != 9){
 	    console.log("Improper length of board cols");
 	    return null
@@ -69,9 +69,9 @@ function solveBackTrack(board){
 	console.log("next position failed");
 	return null
     }
-    x = next[0];
-    y = next[1];
-    for(n=1; n<10; n++){
+    var x = next[0];
+    var y = next[1];
+    for(var n=1; n<10; n++){
 	if(isValid(board, x, y, n)){
 	    board[x][y] = n  // try n
 	    if(solveBackTrack(board)){
@@ -84,8 +84,8 @@ function solveBackTrack(board){
 }
 
 function getNext(board){
-    for(x=0; x<board.length; x++){
-	for(y=0; y<board[x].length; y++){
+    for(var x=0; x<board.length; x++){
+	for(var y=0; y<board[x].length; y++){
 	    if(board[x][y] == 0){
 		return [x,y];
 	    }
@@ -96,14 +96,14 @@ function getNext(board){
 
 function isValid(board, i, j, n){
     // check row
-    for(x=0; x<board[i].length; x++){
+    for(var x=0; x<board[i].length; x++){
 	var current = board[i][x];
 	if(current == n){
 	    return false;
 	}
     }
     // check col
-    for(y=0; y<board.length; y++){
+    for(var y=0; y<board.length; y++){
 	var current = board[y][j];
 	if(current == n){
 	    return false;
@@ -112,8 +112,8 @@ function isValid(board, i, j, n){
     // 3x3 box
     var a = Math.floor(i / 3);  // might need to round
     var b = Math.floor(j / 3);
-    for(x=a*3; x<(a+1)*3; x++){
-	for(y=b*3; y<(b+1)*3; y++){
+    for(var x=a*3; x<(a+1)*3; x++){
+	for(var y=b*3; y<(b+1)*3; y++){
 	    var current = board[x][y];
 	    if(current == n){
 		return false;
